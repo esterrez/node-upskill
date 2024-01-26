@@ -22,3 +22,10 @@ using:
 - test
     > 
 
+### Database connection 
+define environment variable `DB_CONNECTION_URI`
+
+example:
+```
+DB_CONNECTION_URI=mysql://user:pass@example.com:3396/nodedata
+```
