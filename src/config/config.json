@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "user",
+    "password": "password",
+    "database": "nodedata",
+    "host": "localhost",
+    "port": "3396",
+    "dialect": "mysql"
+  }
+}

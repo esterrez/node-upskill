@@ -1,9 +1,19 @@
 declare namespace Express {
   import { Sequelize } from "sequelize";
+
+  type Database = {
+    sequelize: Sequelize;
+  };
+
+  type Modles = {
+    Product: typeof import("./models/Product").Product;
+    User: typeof import("./models/User").User;
+  };
+
   // These open interfaces may be extended in an application-specific manner via declaration merging.
   // See for example method-override.d.ts (https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/method-override/index.d.ts)
   export interface Request {
-    database: Sequelize;
+    db: Database & Models;
   }
 }
 
