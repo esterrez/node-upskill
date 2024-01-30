@@ -33,11 +33,15 @@ product.patch("/:id", async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id);
 
-    await product?.update(req.body);
-    await product?.save();
+    if (!product) {
+      return res.status(404).send();
+    }
 
-    res.send(product);
+    await product?.update(req.body);
+
+    res.send();
   } catch (cause) {
+    console.error(cause);
     res.status(500).send(new PersistanceError({ cause }));
   }
 });
@@ -45,5 +49,10 @@ product.patch("/:id", async (req, res) => {
 product.delete("/:id", async (req, res) => {
   const product = await Product.findByPk(req.params.id);
 
-  product?.destroy();
+  if (!product) {
+    return res.status(404).send();
+  }
+
+  await product?.destroy();
+  res.status(204).send();
 });
