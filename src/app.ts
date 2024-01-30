@@ -2,6 +2,7 @@ import express from "express";
 import { database } from "./middleware/database";
 import { product } from "./route/product";
 import bodyParser from "body-parser";
+import { order } from "./route/order";
 
 export const app = express();
 
@@ -18,5 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/product", product);
+
+app.use("/order", order);
 
 export default app;
