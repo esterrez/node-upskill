@@ -2,8 +2,8 @@ import type { RequestHandler } from "express";
 import { Sequelize } from "sequelize-typescript";
 import { User } from "../models/User";
 import { Product } from "../models/Product";
-import { Order } from "../models/Order";
-import { OrderItem } from "../models/OrderItem";
+import { Container } from "../models/Container";
+import { Item } from "../models/Item";
 
 export const database: RequestHandler = async (req, res, next) => {
   const sequelize = new Sequelize(process.env.DB_CONNECTION_URI, {
@@ -12,7 +12,7 @@ export const database: RequestHandler = async (req, res, next) => {
       collate: "utf8_general_ci",
       timestamps: true,
     },
-    models: [User, Product, Order, OrderItem],
+    models: [User, Product, Container, Item],
   });
 
   try {

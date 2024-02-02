@@ -1,15 +1,8 @@
 import { Router } from "express";
-import { Order } from "../models/Order";
-import { pagination } from "../helper/pagination";
+import { listCustomerOrders, createOrderFromBasket } from "../controller/order";
 
 export const order = Router();
 
-order.get("/", async (req, res) => {
-  const { page } = req.query;
-  const products = await Order.findAll({
-    ...pagination(page),
-    order: [["createdAt", "DESC"]],
-  });
+order.get("/", listCustomerOrders);
 
-  res.send(products);
-});
+order.post("/", createOrderFromBasket);

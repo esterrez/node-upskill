@@ -7,20 +7,24 @@ import {
   Table,
   UpdatedAt,
   BelongsTo,
+  DataType,
 } from "sequelize-typescript";
 
-import { Order } from "./Order";
+import { Container } from "./Container";
 import { Product } from "./Product";
 
 @Table({
-  tableName: "order_items",
+  tableName: "items",
 })
-export class OrderItem extends Model<
-  InferAttributes<OrderItem>,
-  InferCreationAttributes<OrderItem>
+export class Item extends Model<
+  InferAttributes<Item>,
+  InferCreationAttributes<Item>
 > {
-  @BelongsTo(() => Order, "order_id")
-  declare order: Order;
+  @BelongsTo(() => Container, "container_id")
+  declare container: Container;
+
+  @Column(DataType.INTEGER)
+  declare container_id: number;
 
   @HasMany(() => Product, "id")
   declare products: Product[];

@@ -8,8 +8,9 @@ import {
   Length,
   Table,
   UpdatedAt,
+  HasOne,
 } from "sequelize-typescript";
-import { Order } from "./Order";
+import { Container } from "./Container";
 
 @Table({
   tableName: "users",
@@ -26,8 +27,19 @@ export class User extends Model<
   @Column
   declare lastName: string;
 
-  @HasMany(() => Order, "user_id")
-  declare orders: Order[];
+  @Length({ min: 2, max: 100 })
+  @Column
+  declare username: string;
+
+  @Length({ min: 2, max: 100 })
+  @Column
+  declare password: string;
+
+  @HasMany(() => Container, "user_id")
+  declare orders: Container[];
+
+  @HasOne(() => Container, "user_id")
+  declare basket: Container;
 
   @CreatedAt
   declare createdAt: Date;

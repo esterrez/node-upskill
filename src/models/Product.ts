@@ -33,6 +33,11 @@ export class Product extends Model<
   })
   declare price: number;
 
+  @Column({
+    type: DataType.INTEGER,
+  })
+  declare availability: number;
+
   @CreatedAt
   declare createdAt: Date;
 

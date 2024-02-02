@@ -4,7 +4,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
-      "orders",
+      "items",
       {
         id: {
           type: Sequelize.INTEGER(16).UNSIGNED,
@@ -12,16 +12,27 @@ module.exports = {
           allowNull: false,
           autoIncrement: true,
         },
-        user_id: {
+        container_id: {
           type: Sequelize.INTEGER(16).UNSIGNED,
           allowNull: false,
           references: {
-            model: "users",
+            model: "containers",
             key: "id",
           },
           onUpdate: "cascade",
           onDelete: "restrict",
         },
+        product_id: {
+          type: Sequelize.INTEGER(16).UNSIGNED,
+          allowNull: false,
+          references: {
+            model: "products",
+            key: "id",
+          },
+          onUpdate: "cascade",
+          onDelete: "restrict",
+        },
+        quantity: Sequelize.INTEGER(5).UNSIGNED,
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
       },
@@ -33,11 +44,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     */
-    await queryInterface.dropTable("orders");
+    await queryInterface.dropTable("items");
   },
 };
